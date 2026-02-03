@@ -7,12 +7,12 @@ $preProvision= <<SCRIPT
 export DEBIAN_FRONTEND=noninteractive
 apt-get install -y tmux virtualenvwrapper
 
-# As per instructions at https://downloads.mariadb.org/mariadb/repositories
-apt-get install -y software-properties-common
-apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 2>&1
-add-apt-repository -y 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.lstn.net/mariadb/repo/10.4/ubuntu xenial main'
+apt-get install -y wget lsb-release gnupg
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.29-1_all.deb
+DEBIAN_FRONTEND=noninteractive dpkg -i mysql-apt-config_0.8.29-1_all.deb
 apt-get update
-apt-get install -y mariadb-server
+apt-get install -y mysql-server
+
 SCRIPT
 
 # Wrap provisioning script with a virutalenv for pip packages
